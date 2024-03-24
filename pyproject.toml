@@ -6,7 +6,7 @@ authors = ["nagraver <ttolla25@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.11"
 python-dotenv = "^1.0.1"
 aiogram = "^3.4.1"
 asyncio = "^3.4.3"
