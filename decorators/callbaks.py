@@ -106,4 +106,4 @@ async def handler(callback: types.CallbackQuery):
 
         except ValueError:
             await message.reply("Не соответствие 24-х часовому формату")
-            await send_settings_menu(user, user_info)
+            await send_time_menu(user)

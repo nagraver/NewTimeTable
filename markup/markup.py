@@ -35,11 +35,12 @@ async def main_buttons(mode):
 
 
 async def settings_buttons():
+    back = InlineKeyboardButton(text="Перейти к расписанию", callback_data="day" + str(date.today()))
     inst_choice = InlineKeyboardButton(text="Институт", callback_data='i_choice')
     group_choice = InlineKeyboardButton(text="Группа", callback_data='g_choice')
     menu_choice = InlineKeyboardButton(text="Меню", callback_data='m_choice')
     schedule_choice = InlineKeyboardButton(text="Рассылка", callback_data='s_choice')
-    return InlineKeyboardMarkup(inline_keyboard=[[inst_choice, group_choice], [menu_choice, schedule_choice]])
+    return InlineKeyboardMarkup(inline_keyboard=[[back], [inst_choice, group_choice], [menu_choice, schedule_choice]])
 
 
 async def inst_buttons():
@@ -69,7 +70,5 @@ async def menu_buttons():
 
 
 async def time_buttons():
-    button = InlineKeyboardButton(text='Отключи отправку', callback_data='off_schedule')
+    button = InlineKeyboardButton(text='Отключи рассылку', callback_data='off_schedule')
     return InlineKeyboardMarkup(inline_keyboard=[[button]])
-
-
