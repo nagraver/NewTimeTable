@@ -33,40 +33,46 @@ async def handler(callback: types.CallbackQuery):
 async def handler(callback: types.CallbackQuery):
     user = str(callback.message.chat.id)
     inst = callback.data[4:]
-    await send_group_menu(user, inst)
+
     col.update_one({'_id': user}, {'$set': {'inst': inst}})
     await append_data(user_list)
+
+    await send_group_menu(user, inst)
 
 
 @router.callback_query(F.data[:5] == 'group')
 async def handler(callback: types.CallbackQuery):
     user = str(callback.message.chat.id)
     group = callback.data[5:]
-    user_info = await check_user_id(user)
-    await send_settings_menu(user, user_info)
+
     col.update_one({'_id': user}, {'$set': {'group': group}})
     await append_data(user_list)
+
+    user_info = await check_user_id(user)
+    await send_settings_menu(user, user_info)
 
 
 @router.callback_query(F.data[:4] == 'mode')
 async def handler(callback: types.CallbackQuery):
     user = str(callback.message.chat.id)
     mode = int(callback.data[4:])
-    user_info = await check_user_id(user)
-    await send_settings_menu(user, user_info)
 
     col.update_one({'_id': user}, {'$set': {'mode': mode}})
     await append_data(user_list)
+
+    user_info = await check_user_id(user)
+    await send_settings_menu(user, user_info)
 
 
 @router.callback_query(F.data == 'off_schedule')
 async def handler(callback: types.CallbackQuery):
     user = str(callback.message.chat.id)
     user_info = await check_user_id(user)
-    await send_settings_menu(user, user_info)
 
     col.update_one({'_id': user}, {'$unset': {'send': ""}})
     await append_data(user_list)
+
+    await send_settings_menu(user, user_info)
 
 
 @router.callback_query(F.data == 'i_choice')
@@ -97,12 +103,12 @@ async def handler(callback: types.CallbackQuery):
     @router.message(F.text)
     async def time_handler(message: types.Message):
         user_time = message.text
-        user_info = await check_user_id(user)
         try:
             datetime.strptime(user_time, '%H:%M')
-            await send_settings_menu(user, user_info)
             col.update_one({'_id': user}, {'$set': {'send': user_time}})
             await append_data(user_list)
+            user_info = await check_user_id(user)
+            await send_settings_menu(user, user_info)
 
         except ValueError:
             await message.reply("Не соответствие 24-х часовому формату")

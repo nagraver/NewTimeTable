@@ -14,6 +14,5 @@ async def main():
     dp.include_routers(commands.router, callbaks.router)
     await asyncio.gather(append_data(user_list), dp.start_polling(bot), scheduled())
 
-
 if __name__ == "__main__":
     asyncio.run(main())

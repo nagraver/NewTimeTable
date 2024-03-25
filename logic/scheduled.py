@@ -11,7 +11,7 @@ from logic.send_message import send_main_menu
 async def scheduled():
     while True:
         await append_data(user_list)
-        now = datetime.now() + timedelta(hours=3)
+        now = datetime.now() #+ timedelta(hours=3)
         for doc in user_list:
             user = doc.get("_id")
             if doc.get("send"):
