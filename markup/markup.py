@@ -70,5 +70,5 @@ async def menu_buttons():
 
 
 async def time_buttons():
-    button = InlineKeyboardButton(text='Отключи рассылку', callback_data='off_schedule')
+    button = InlineKeyboardButton(text='Отключить рассылку', callback_data='off_schedule')
     return InlineKeyboardMarkup(inline_keyboard=[[button]])

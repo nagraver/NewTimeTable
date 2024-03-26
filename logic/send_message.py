@@ -1,4 +1,4 @@
-from connection import bot, week_day, time_list, institutes_arr
+from connection import bot, week_day, time_list, institutes_arr, col
 from datetime import datetime
 from markup import inst_buttons, group_buttons, menu_buttons, main_buttons, time_buttons, settings_buttons
 from logic import get_schedule
@@ -17,8 +17,19 @@ async def send_mode_menu(user):
 
 
 async def send_time_menu(user):
-    await bot.send_message(user, text="Введи желаемое время для отправки расписания или",
+    await bot.send_message(user, text="Введи желаемое время для отправки расписания",
                            reply_markup=await time_buttons())
+
+
+async def send_error(user, error, user_info):
+    await bot.send_message(user, f'{error}')
+    if user_info is None:
+        col.insert_one({'_id': user, 'mode': 0})
+        await send_inst_menu(user)
+    elif user_info.get('inst') is None:
+        await send_inst_menu(user)
+    elif user_info.get('group') is None:
+        await send_group_menu(user, user_info.get('inst'))
 
 
 async def send_main_menu(user, user_info, the_day):
@@ -58,11 +69,12 @@ async def send_main_menu(user, user_info, the_day):
 
 async def send_settings_menu(user, user_info):
     inst = user_info.get('inst')
+    inst = institutes_arr[int(inst)] if inst is not None else None
     group = user_info.get('group')
     mode = user_info.get('mode')
     send = user_info.get('send')
     await bot.send_message(
         chat_id=user,
-        text=f'*Институт:* _{institutes_arr[int(inst)]}_\n*Группа:* _{group}_\n*Меню:* _{(mode + 1) * 4}_\n*Рассылка:* _{send}_',
+        text=f'*Институт:* _{inst}_\n*Группа:* _{group}_\n*Меню:* _{(mode + 1) * 4}_\n*Рассылка:* _{send}_',
         reply_markup=await settings_buttons()
     )
