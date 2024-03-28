@@ -2,8 +2,10 @@ from aiogram import Router, types, F
 from aiogram.fsm.context import FSMContext
 from datetime import datetime, date
 
-from logic import (send_inst_menu, send_group_menu, send_mode_menu, send_time_menu,
-                   send_main_menu, send_settings_menu, send_error)
+from logic import (
+    edit_to_inst_menu, edit_to_group_menu, edit_to_mode_menu, edit_to_time_menu, edit_to_error, edit_to_settings_menu,
+    edit_to_main_menu, send_settings_menu, send_time_menu
+)
 from connection import col
 from logic.states import Schedule
 
@@ -13,90 +15,100 @@ router = Router()
 @router.callback_query(F.data[:3] == 'day')
 async def handler(callback: types.CallbackQuery):
     user = str(callback.message.chat.id)
+    mess_id = callback.message.message_id
     the_day = datetime.strptime(callback.data[3:], "%Y-%m-%d").date()
     user_info = col.find_one({'_id': user})
     try:
-        await send_main_menu(user, user_info, the_day)
+        await edit_to_main_menu(user_info, mess_id, the_day)
         col.update_one({'_id': user}, {'$set': {'usage': date.today().strftime('%Y.%m.%d')}})
 
-    except Exception as e:
-        await send_error(user, e, user_info)
+    except Exception:
+        await edit_to_error(user_info, mess_id)
 
 
 @router.callback_query(F.data[:4] == 'inst')
 async def handler(callback: types.CallbackQuery):
     user = str(callback.message.chat.id)
+    mess_id = callback.message.message_id
     inst = callback.data[4:]
 
     col.update_one({'_id': user}, {'$set': {'inst': inst}})
+    user_info = col.find_one({'_id': user})
 
-    await send_group_menu(user, inst)
+    await edit_to_group_menu(user_info, mess_id)
 
 
 @router.callback_query(F.data[:5] == 'group')
 async def handler(callback: types.CallbackQuery):
     user = str(callback.message.chat.id)
+    mess_id = callback.message.message_id
     group = callback.data[5:]
 
     col.update_one({'_id': user}, {'$set': {'group': group}})
     user_info = col.find_one({'_id': user})
-    await send_settings_menu(user, user_info)
+
+    await edit_to_settings_menu(user_info, mess_id)
 
 
 @router.callback_query(F.data[:4] == 'mode')
 async def handler(callback: types.CallbackQuery):
     user = str(callback.message.chat.id)
+    mess_id = callback.message.message_id
     mode = int(callback.data[4:])
 
     col.update_one({'_id': user}, {'$set': {'mode': mode}})
     user_info = col.find_one({'_id': user})
-    await send_settings_menu(user, user_info)
+    await edit_to_settings_menu(user_info, mess_id)
 
 
 @router.callback_query(F.data == 'i_choice')
 async def handler(callback: types.CallbackQuery):
     user = str(callback.message.chat.id)
-    await send_inst_menu(user)
+    mess_id = callback.message.message_id
+    user_info = col.find_one({'_id': user})
+    await edit_to_inst_menu(user_info, mess_id)
 
 
 @router.callback_query(F.data == 'g_choice')
 async def handler(callback: types.CallbackQuery):
     user = str(callback.message.chat.id)
+    mess_id = callback.message.message_id
     user_info = col.find_one({'_id': user})
     try:
-        inst = user_info.get('inst')
-        await send_group_menu(user, inst)
+        await edit_to_group_menu(user_info, mess_id)
 
-    except Exception as e:
-        await send_error(user, e, user_info)
+    except Exception:
+        await edit_to_error(user_info, mess_id)
 
 
 @router.callback_query(F.data == 'm_choice')
 async def handler(callback: types.CallbackQuery):
     user = str(callback.message.chat.id)
+    mess_id = callback.message.message_id
     user_info = col.find_one({'_id': user})
     try:
-        print(user_info)
-        await send_mode_menu(user)
+        await edit_to_mode_menu(user_info, mess_id)
 
-    except Exception as e:
-        await send_error(user, e, user_info)
+    except Exception:
+        await edit_to_error(user_info, mess_id)
 
 
 @router.callback_query(F.data == 's_choice')
 async def handler(callback: types.CallbackQuery, state: FSMContext):
     user = str(callback.message.chat.id)
+    mess_id = callback.message.message_id
     user_info = col.find_one({'_id': user})
     try:
-        await send_time_menu(user_info.get('_id'))
+        # Здесь я получаю айди с помощью get, чтобы удостовериться в том, что пользователь зарегистрирован
+        await edit_to_time_menu(user_info, mess_id)
         await state.set_state(Schedule.text)
 
-    except Exception as e:
-        await send_error(user, e, user_info)
+    except Exception:
+        await edit_to_error(user_info, mess_id)
 
 
 @router.message(F.text, Schedule.text)
-async def time_handler(message: types.Message):
+async def time_handler(message: types.Message, state: FSMContext):
     user = str(message.chat.id)
     user_time = message.text
 
@@ -105,6 +117,7 @@ async def time_handler(message: types.Message):
         col.update_one({'_id': user}, {'$set': {'send': user_time}})
         user_info = col.find_one({'_id': user})
         await send_settings_menu(user, user_info)
+        await state.clear()
 
     except ValueError:
         await message.reply("Не соответствие 24-х часовому формату")
@@ -112,10 +125,12 @@ async def time_handler(message: types.Message):
 
 
 @router.callback_query(F.data == 'off_schedule')
-async def handler(callback: types.CallbackQuery):
+async def handler(callback: types.CallbackQuery, state: FSMContext):
     user = str(callback.message.chat.id)
+    mess_id = callback.message.message_id
 
-    col.update_one({'_id': user}, {'$unset': {'send': ""}})
+    col.update_one({'_id': user}, {'$unset': {'send': ''}})
     user_info = col.find_one({'_id': user})
 
-    await send_settings_menu(user, user_info)
+    await edit_to_settings_menu(user_info, mess_id)
+    await state.clear()
