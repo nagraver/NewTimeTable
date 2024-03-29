@@ -2,7 +2,7 @@ from datetime import datetime, date, timedelta
 import asyncio
 
 from connection import col
-from logic.send_message import send_main_menu
+from logic.send_message import send_schedule
 
 
 # async def scheduled():
@@ -32,7 +32,7 @@ async def scheduled():
             if time_obj.hour == now.hour and time_obj.minute == now.minute and now.weekday != 6:
                 try:
                     user_info = col.find_one({'_id': doc.get('_id')})
-                    await send_main_menu(doc.get('_id'), user_info, date.today())
+                    await send_schedule(doc.get('_id'), user_info)
                     await asyncio.sleep(0.5)
 
                 except Exception:

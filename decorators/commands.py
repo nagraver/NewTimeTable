@@ -1,9 +1,9 @@
 from aiogram import Router, types
 from aiogram.filters import Command
-from datetime import date
 
 from connection import col
-from logic import send_main_menu, send_settings_menu
+from logic.send_message import send_settings, send_schedule
+from markup import settings_buttons
 
 router = Router()
 
@@ -12,11 +12,12 @@ router = Router()
 async def start(message: types.Message):
     user = str(message.from_user.id)
     user_info = col.find_one({'_id': user})
-    await send_main_menu(user, user_info, date.today())
+    await send_schedule(user, user_info)
 
 
 @router.message(Command("settings"))
 async def start(message: types.Message):
     user = str(message.from_user.id)
     user_info = col.find_one({'_id': user})
-    await send_settings_menu(user, user_info)
+    markup = await settings_buttons()
+    await send_settings(user, user_info, markup)

@@ -1,6 +1,6 @@
 from connection import week_day, time_list, institutes_arr
 from logic import get_schedule
-from datetime import datetime
+from datetime import datetime, date
 
 
 async def settings_text(user_info):
@@ -14,7 +14,7 @@ async def settings_text(user_info):
     return txt
 
 
-async def schedule_text(user_info, the_day):
+async def schedule_text(user_info, the_day=date.today()):
     inst = user_info.get('inst')
     group = user_info.get('group')
     array = await get_schedule(inst, group, the_day)
