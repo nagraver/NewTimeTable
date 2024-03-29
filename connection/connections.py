@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-bot = Bot(os.getenv("CROWBOT"), parse_mode="MARKDOWN")
+bot = Bot(os.getenv("BOT"), parse_mode="MARKDOWN")
 uri = os.getenv("URI")
 
 client = MongoClient(uri, server_api=ServerApi('1'))

@@ -3,7 +3,7 @@ from aiogram.filters import Command
 from datetime import date
 
 from connection import col
-from logic import send_main_menu, send_settings_menu, send_error
+from logic import send_main_menu, send_settings_menu
 
 router = Router()
 
@@ -12,19 +12,11 @@ router = Router()
 async def start(message: types.Message):
     user = str(message.from_user.id)
     user_info = col.find_one({'_id': user})
-    try:
-        await send_main_menu(user, user_info, date.today())
-
-    except Exception:
-        await send_error(user, user_info)
+    await send_main_menu(user, user_info, date.today())
 
 
 @router.message(Command("settings"))
 async def start(message: types.Message):
     user = str(message.from_user.id)
     user_info = col.find_one({'_id': user})
-    try:
-        await send_settings_menu(user, user_info)
-
-    except Exception:
-        await send_error(user, user_info)
+    await send_settings_menu(user, user_info)
