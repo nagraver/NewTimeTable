@@ -1,7 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from datetime import date, timedelta
-from connection import institutes_arr, week_day
-from logic import get_groups
+from storage.lists import institutes_arr, week_day
+from logic.get_dict import get_groups
 
 
 async def main_buttons(mode):

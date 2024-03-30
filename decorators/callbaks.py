@@ -2,9 +2,10 @@ from aiogram import Router, types, F
 from aiogram.fsm.context import FSMContext
 from datetime import datetime, date
 
-from logic import (edit_to_settings, edit_to_schedule, send_settings)
-from markup import settings_buttons, time_buttons, menu_buttons, group_buttons, inst_buttons
-from connection import col
+from logic.edit_message import edit_to_settings, edit_to_schedule
+from logic.send_message import send_settings
+from keyboards.markup import settings_buttons, time_buttons, menu_buttons, group_buttons, inst_buttons
+from storage.connection import col
 from logic.states import Schedule
 
 router = Router()

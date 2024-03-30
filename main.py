@@ -6,8 +6,8 @@ from aiogram import Dispatcher
 from dotenv import load_dotenv
 
 from decorators import commands, callbaks
-from connection import bot
-from logic import scheduled
+from storage.connection import bot
+from logic.scheduled import scheduled
 
 load_dotenv()
 

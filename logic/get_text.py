@@ -1,5 +1,5 @@
-from connection import week_day, time_list, institutes_arr
-from logic import get_schedule
+from storage.lists import week_day, time_list, institutes_arr
+from logic.get_dict import get_schedule
 from datetime import datetime, date
 
 

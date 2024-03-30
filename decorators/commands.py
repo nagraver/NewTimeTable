@@ -1,9 +1,9 @@
 from aiogram import Router, types
 from aiogram.filters import Command
 
-from connection import col
+from storage.connection import col
 from logic.send_message import send_settings, send_schedule
-from markup import settings_buttons
+from keyboards.markup import settings_buttons
 
 router = Router()
 

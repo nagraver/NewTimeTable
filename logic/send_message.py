@@ -1,8 +1,8 @@
-from connection import bot, col
+from storage.connection import bot, col
 
-from markup import inst_buttons, group_buttons, main_buttons
+from keyboards.markup import inst_buttons, group_buttons, main_buttons
 
-from logic.output_text import settings_text, schedule_text
+from logic.get_text import settings_text, schedule_text
 
 
 async def send_error(user, user_info):
