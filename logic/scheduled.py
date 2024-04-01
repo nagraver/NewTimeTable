@@ -32,7 +32,7 @@ async def scheduled():
             if time_obj.hour == now.hour and time_obj.minute == now.minute and now.weekday != 6:
                 try:
                     user_info = col.find_one({'_id': doc.get('_id')})
-                    await send_schedule(doc.get('_id'), user_info)
+                    await send_schedule(doc.get('_id'), user_info, date.today())
                     await asyncio.sleep(0.5)
 
                 except Exception:

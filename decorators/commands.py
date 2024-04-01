@@ -1,6 +1,6 @@
 from aiogram import Router, types
 from aiogram.filters import Command
-
+from datetime import date
 from storage.connection import col
 from logic.send_message import send_settings, send_schedule
 from keyboards.markup import settings_buttons
@@ -12,7 +12,7 @@ router = Router()
 async def start(message: types.Message):
     user = str(message.from_user.id)
     user_info = col.find_one({'_id': user})
-    await send_schedule(user, user_info)
+    await send_schedule(user, user_info, date.today())
 
 
 @router.message(Command("settings"))

@@ -14,7 +14,7 @@ async def settings_text(user_info):
     return txt
 
 
-async def schedule_text(user_info, the_day=date.today()):
+async def schedule_text(user_info, the_day):
     inst = user_info.get('inst')
     group = user_info.get('group')
     array = await get_schedule(inst, group, the_day)

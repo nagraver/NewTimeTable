@@ -17,9 +17,9 @@ async def send_error(user, user_info):
         await send_settings(user, user_info, await group_buttons(inst))
 
 
-async def send_schedule(user, user_info):
+async def send_schedule(user, user_info, the_day):
     try:
-        txt = await schedule_text(user_info)
+        txt = await schedule_text(user_info, the_day)
         await bot.send_message(
             chat_id=user,
             text=txt,
