@@ -88,12 +88,20 @@ async def menu_buttons():
 
 
 async def time_buttons():
+    today = InlineKeyboardButton(
+        text='На сегодня',
+        callback_data='s_today',
+    )
+    tomorrow = InlineKeyboardButton(
+        text='На завтра',
+        callback_data='s_tomorrow',
+    )
+    button = InlineKeyboardButton(
+        text='Отключить рассылку',
+        callback_data='off_schedule',
+    )
     back = InlineKeyboardButton(
         text='Вернуться к настройкам',
         callback_data='settings'
     )
-    button = InlineKeyboardButton(
-        text='Отключить или ввести время',
-        callback_data='off_schedule',
-    )
-    return InlineKeyboardMarkup(inline_keyboard=[[button], [back]])
+    return InlineKeyboardMarkup(inline_keyboard=[[button], [today, tomorrow], [back]])

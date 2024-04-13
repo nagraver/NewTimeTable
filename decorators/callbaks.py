@@ -23,12 +23,12 @@ async def handler(callback: types.CallbackQuery):
 
 @router.callback_query(F.data == 'settings')
 async def handler(callback: types.CallbackQuery, state: FSMContext):
+    await state.clear()
     user = str(callback.message.chat.id)
     mess_id = callback.message.message_id
     user_info = col.find_one({'_id': user})
     markup = await settings_buttons()
     await edit_to_settings(user, user_info, mess_id, markup)
-    await state.clear()
 
 
 @router.callback_query(F.data[:4] == 'inst')
@@ -104,16 +104,16 @@ async def handler(callback: types.CallbackQuery):
 
 @router.callback_query(F.data == 's_choice')
 async def handler(callback: types.CallbackQuery, state: FSMContext):
+    await state.clear()
     user = str(callback.message.chat.id)
     mess_id = callback.message.message_id
     user_info = col.find_one({'_id': user})
-    markup = await time_buttons()
-    await edit_to_settings(user, user_info, mess_id, markup)
+    await edit_to_settings(user, user_info, mess_id, await time_buttons())
     await state.set_state(Schedule.text)
 
 
 @router.message(F.text, Schedule.text)
-async def time_handler(message: types.Message, state: FSMContext):
+async def time_handler(message: types.Message):
     user = str(message.chat.id)
     user_time = message.text
 
@@ -121,23 +121,28 @@ async def time_handler(message: types.Message, state: FSMContext):
         datetime.strptime(user_time, '%H:%M')
         col.update_one({'_id': user}, {'$set': {'send': user_time}})
         user_info = col.find_one({'_id': user})
-        await send_settings(user, user_info, await settings_buttons())
-        await state.clear()
+        await send_settings(user, user_info, await time_buttons())
 
     except ValueError:
-        await message.reply("Не соответствие 24-х часовому формату")
-        user_info = col.find_one({'_id': user})
-        await send_settings(user, user_info, await time_buttons())
+        await message.reply("Не соответствие формату ЧЧ:ММ", reply_markup=await time_buttons())
+
+
+@router.callback_query(F.data[:3] == 's_t')
+async def handler(callback: types.CallbackQuery):
+    user = str(callback.message.chat.id)
+    mess_id = callback.message.message_id
+    send_day = 0 if callback.data == 's_today' else 1
+    col.update_one({'_id': user}, {'$set': {'send_day': send_day}})
+    user_info = col.find_one({'_id': user})
+    await edit_to_settings(user, user_info, mess_id, await time_buttons())
 
 
 @router.callback_query(F.data == 'off_schedule')
-async def handler(callback: types.CallbackQuery, state: FSMContext):
+async def handler(callback: types.CallbackQuery):
     user = str(callback.message.chat.id)
     mess_id = callback.message.message_id
-    markup = await settings_buttons()
 
     col.update_one({'_id': user}, {'$unset': {'send': ''}})
     user_info = col.find_one({'_id': user})
 
-    await edit_to_settings(user, user_info, mess_id, markup)
-    await state.clear()
+    await edit_to_settings(user, user_info, mess_id, await time_buttons())

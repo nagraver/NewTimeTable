@@ -9,8 +9,9 @@ async def settings_text(user_info):
     group = user_info.get('group')
     mode = user_info.get('mode')
     send = user_info.get('send')
-
-    txt = f'*Институт:* _{inst}_\n*Группа:* _{group}_\n*Меню:* _{(mode + 1) * 4}_\n*Рассылка:* _{send}_'
+    send_day = user_info.get('send_day')
+    send_day = ["На сегодня", "На завтра"][send_day] if send_day is not None else None
+    txt = f'*Институт:* _{inst}_\n*Группа:* _{group}_\n*Меню:* _{(mode + 1) * 4}_\n*Рассылка:* _{send_day} в {send}_'
     return txt
 
 
