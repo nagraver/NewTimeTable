@@ -19,12 +19,9 @@ async def get_schedule(inst, group, the_day):
 
     url = 'https://sevsu.samrzhevsky.ru/api/schedule?v=3.1&section=0&institute=' + inst + '&group=' + str(
         quote_plus(group)) + '&week=' + str(week_number)
+
     async with httpx.AsyncClient() as client:
         task = client.get(url)
         response = await asyncio.create_task(task)
 
-    try:
-        return response.json().get('schedule')
-
-    except KeyError:
-        return None
+    return response.json().get('schedule')

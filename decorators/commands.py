@@ -4,8 +4,7 @@ from datetime import date
 
 from aiogram.fsm.context import FSMContext
 
-from storage.connection import col
-from logic.send_message import send_settings, send_schedule
+from logic.process import process_the_settings, process_the_message
 from keyboards.markup import settings_buttons
 
 router = Router()
@@ -15,14 +14,12 @@ router = Router()
 async def start(message: types.Message, state: FSMContext):
     await state.clear()
     user = str(message.from_user.id)
-    user_info = col.find_one({'_id': user})
-    await send_schedule(user, user_info, date.today())
+    await process_the_message(user=user, the_day=date.today())
 
 
 @router.message(Command("settings"))
 async def start(message: types.Message, state: FSMContext):
     await state.clear()
     user = str(message.from_user.id)
-    user_info = col.find_one({'_id': user})
     markup = await settings_buttons()
-    await send_settings(user, user_info, markup)
+    await process_the_settings(user=user, markup=markup, include_all=True)
