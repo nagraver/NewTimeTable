@@ -1,6 +1,5 @@
 from datetime import datetime
 
-
 from logic.get_dict import get_schedule
 from keyboards.markup import inst_buttons, group_buttons, main_buttons
 from storage.connection import bot, Mongo
@@ -67,7 +66,6 @@ async def process_the_message(user, the_day, msg=False):
             text=message,
             reply_markup=await main_buttons(mode)
         )
-
     await db.update_data(user=user, usage=True)
 
 
@@ -83,7 +81,7 @@ async def process_the_settings(
     mode = user_info.get('mode')
     send = user_info.get('send')
     send_day = user_info.get('send_day')
-    send_day = ["На сегодня", "На завтра"][send_day] if send_day is not None else None
+    send_day = ["сегодня", "завтра"][send_day] if send_day is not None else None
 
     txt = ""
     if include_institute:
@@ -93,12 +91,13 @@ async def process_the_settings(
     if include_mode:
         txt += f"\n*Меню:* _{(2 ** mode) * 4}_"
     if include_send:
-        txt += f"\n*Рассылка:* _{send_day} в {send}_"
+        txt += (f"\n*Рассылка:* _{send} на {send_day}_"
+                f"\n\nВведи время в формате ЧЧ:ММ")
     if include_all:
         txt = (f'*Институт:* _{inst}_\n'
                f'*Группа:* _{group}_\n'
                f'*Меню:* _{(2 ** mode) * 4}_\n'
-               f'*Рассылка:* _{send_day} в {send}_')
+               f'*Рассылка:* _{send} на {send_day}_')
 
     if msg:
         await bot.edit_message_text(

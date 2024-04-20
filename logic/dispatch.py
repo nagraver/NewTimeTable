@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime, date, timedelta
 import asyncio
 
@@ -8,11 +9,11 @@ db = Mongo()
 col = db.col
 
 
-async def scheduled():
+async def dispatch():
     while True:
         user_list = col.find({'send': {'$exists': True}})
-        # now = datetime.now() + timedelta(hours=3)
-        now = datetime.now()
+        now = datetime.now() + timedelta(hours=3)
+        # now = datetime.now()
         for doc in user_list:
             time_obj = datetime.strptime(doc.get("send"), "%H:%M")
             if time_obj.hour == now.hour and time_obj.minute == now.minute and now.weekday != 6:
@@ -23,6 +24,6 @@ async def scheduled():
                     await asyncio.sleep(0.5)
 
                 except Exception as e:
-                    print(e)
+                    logging.error(f"Error:{e}")
 
         await asyncio.sleep(60)

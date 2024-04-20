@@ -21,5 +21,5 @@ async def start(message: types.Message, state: FSMContext):
 async def start(message: types.Message, state: FSMContext):
     await state.clear()
     user = str(message.from_user.id)
-    markup = await settings_buttons()
+    markup = await settings_buttons(user)
     await process_the_settings(user=user, markup=markup, include_all=True)

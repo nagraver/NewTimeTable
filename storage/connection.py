@@ -7,7 +7,7 @@ from datetime import date
 
 load_dotenv()
 
-bot = Bot(os.getenv("BOT"), parse_mode="MARKDOWN")
+bot = Bot(os.getenv("TESTBOT"), parse_mode="MARKDOWN")
 uri = os.getenv("URI")
 
 
@@ -20,23 +20,23 @@ class Mongo:
     async def get_user_info(self, user):
         user_info = self.col.find_one({"_id": user})
         if user_info is None:
-            self.col.insert_one({"_id": user, "mode": 0})
+            self.col.insert_one({"_id": user, "mode": 0, "send_day": 0})
             user_info = self.col.find_one({"_id": user})
         return user_info
 
     async def update_data(self, user, inst=None, group=None, mode=None, send=None, send_day=None, usage=None):
-        if inst is not None:
+        if inst:
             self.col.update_one({'_id': user}, {'$set': {'inst': inst}})
-        elif group is not None:
+        elif group:
             self.col.update_one({'_id': user}, {'$set': {'group': group}})
-        elif mode is not None:
+        elif mode:
             self.col.update_one({'_id': user}, {'$set': {'mode': mode}})
-        elif send is not None:
+        elif send:
             if send == '':
                 self.col.update_one({'_id': user}, {'$unset': {'send': ''}})
                 return
             self.col.update_one({'_id': user}, {'$set': {'send': send}})
         elif send_day is not None:
             self.col.update_one({'_id': user}, {'$set': {'send_day': send_day}})
-        elif usage is not None:
+        elif usage:
             self.col.update_one({'_id': user}, {'$set': {'usage': date.today().strftime('%Y.%m.%d')}})

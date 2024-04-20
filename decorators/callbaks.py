@@ -24,7 +24,7 @@ async def handler(callback: types.CallbackQuery, state: FSMContext):
     await state.clear()
     user = str(callback.message.chat.id)
     mess_id = callback.message.message_id
-    markup = await settings_buttons()
+    markup = await settings_buttons(user)
     await process_the_settings(user, markup, mess_id, include_all=True)
 
 
@@ -44,7 +44,7 @@ async def handler(callback: types.CallbackQuery):
     inst = user_info.get('inst')
     if inst is None:
         markup = await inst_buttons()
-        await process_the_settings(user, markup, include_all=True)
+        await process_the_settings(user, markup, include_group=True)
         return
     markup = await group_buttons(inst)
     await process_the_settings(user, markup, mess_id, include_group=True)
@@ -76,7 +76,7 @@ async def handler(callback: types.CallbackQuery):
     inst = callback.data[4:]
     markup = await group_buttons(inst)
     await db.update_data(user=user, inst=inst)
-    await process_the_settings(user, markup, mess_id, include_all=True)
+    await process_the_settings(user, markup, mess_id, include_group=True)
 
 
 @router.callback_query(F.data[:5] == 'group')
@@ -84,7 +84,7 @@ async def handler(callback: types.CallbackQuery):
     user = str(callback.message.chat.id)
     mess_id = callback.message.message_id
     group = callback.data[5:]
-    markup = await settings_buttons()
+    markup = await settings_buttons(user)
     await db.update_data(user=user, group=group)
     await process_the_settings(user, markup, mess_id, include_all=True)
 
@@ -94,7 +94,7 @@ async def handler(callback: types.CallbackQuery):
     user = str(callback.message.chat.id)
     mess_id = callback.message.message_id
     mode = int(callback.data[4:])
-    markup = await settings_buttons()
+    markup = await settings_buttons(user)
     await db.update_data(user=user, mode=mode)
     await process_the_settings(user, markup, mess_id, include_all=True)
 
