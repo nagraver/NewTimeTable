@@ -21,16 +21,17 @@ async def mailing(callback: types.CallbackQuery, state: FSMContext) -> None:
 
 @router.message(Schedule.mailing)
 async def mailing_message(message: types.Message, state: FSMContext) -> None:
-    user = str(message.chat.id)
+    try:
+        user = str(message.chat.id)
 
-    user_list = col.find()
-    txt = ''
-    for i in user_list:
-        txt += f"{i.get('_id')} \n"
-    await bot.send_message("6103118179", message.text)
-    await bot.send_message("6103118179", txt)
-    await message.answer("Рассылка завершена. Выход из состояния рассылки.")
+        user_list = col.find()
+        for item in user_list:
+            await bot.send_message(chat_id={item.get('_id')}, text=message.text)
+        await message.answer("Рассылка завершена. Выход из состояния рассылки.")
 
-    markup = await settings_buttons(user=user)
-    await process_the_settings(user=user, markup=markup, include_all=True)
-    await state.clear()
+        markup = await settings_buttons(user=user)
+        await process_the_settings(user=user, markup=markup, include_all=True)
+        await state.clear()
+
+    except Exception as e:
+        await message.answer(f"{e}")

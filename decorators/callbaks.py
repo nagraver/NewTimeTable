@@ -64,7 +64,6 @@ async def handler(callback: types.CallbackQuery, state: FSMContext):
     user = str(callback.message.chat.id)
     mess_id = callback.message.message_id
     markup = await time_buttons()
-
     await process_the_settings(user, markup, mess_id, include_send=True)
     await state.set_state(Schedule.text)
 
