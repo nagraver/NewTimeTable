@@ -7,7 +7,7 @@ from datetime import date
 
 load_dotenv()
 
-bot = Bot(os.getenv("BOT"), parse_mode="MARKDOWN")
+bot = Bot(os.getenv("TESTBOT"), parse_mode="MARKDOWN")
 uri = os.getenv("URI")
 
 

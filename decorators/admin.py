@@ -1,5 +1,6 @@
 from aiogram import F, Router, types
 from aiogram.fsm.context import FSMContext
+import logging
 
 from keyboards.markup import settings_buttons, back_button
 from logic.states import Schedule
@@ -26,7 +27,8 @@ async def mailing_message(message: types.Message, state: FSMContext) -> None:
 
         user_list = col.find()
         for item in user_list:
-            await bot.send_message(chat_id={item.get('_id')}, text=message.text)
+            user = item.get("_id")
+            await bot.send_message(chat_id=str(user), text=message.text)
         await message.answer("Рассылка завершена. Выход из состояния рассылки.")
 
         markup = await settings_buttons(user=user)
@@ -34,4 +36,4 @@ async def mailing_message(message: types.Message, state: FSMContext) -> None:
         await state.clear()
 
     except Exception as e:
-        await message.answer(f"{e}")
+        await logging.error(f"{e}")
