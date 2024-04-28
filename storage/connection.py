@@ -7,7 +7,7 @@ from datetime import date
 
 load_dotenv()
 
-bot = Bot(os.getenv("BOT"), parse_mode="MARKDOWN")
+bot = Bot(os.getenv("TESTBOT"), parse_mode="MARKDOWN")
 uri = os.getenv("URI")
 
 
@@ -31,11 +31,11 @@ class Mongo:
             self.col.update_one({'_id': user}, {'$set': {'group': group}})
         elif mode:
             self.col.update_one({'_id': user}, {'$set': {'mode': mode}})
-        elif send:
+        elif send is not None:
             if send == '':
                 self.col.update_one({'_id': user}, {'$unset': {'send': ''}})
-                return
-            self.col.update_one({'_id': user}, {'$set': {'send': send}})
+            else:
+                self.col.update_one({'_id': user}, {'$set': {'send': send}})
         elif send_day is not None:
             self.col.update_one({'_id': user}, {'$set': {'send_day': send_day}})
         elif usage:
