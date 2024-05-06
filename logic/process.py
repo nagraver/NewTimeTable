@@ -1,9 +1,10 @@
 from datetime import datetime
-
+from aiogram.exceptions import TelegramBadRequest
 from logic.get_dict import get_schedule
 from keyboards.markup import inst_buttons, group_buttons, main_buttons
 from storage.connection import bot, Mongo
 from storage.lists import week_day, time_list, institutes_arr
+
 
 db = Mongo()
 
@@ -54,12 +55,15 @@ async def process_the_message(user, the_day, msg=False):
         message += f"\n\nЗанятий нет, либо расписание еще не появилось"
 
     if msg:
-        await bot.edit_message_text(
-            chat_id=user,
-            message_id=msg,
-            text=message,
-            reply_markup=await main_buttons(mode)
-        )
+        try:
+            await bot.edit_message_text(
+                chat_id=user,
+                message_id=msg,
+                text=message,
+                reply_markup=await main_buttons(mode)
+            )
+        except TelegramBadRequest:
+            pass
     else:
         await bot.send_message(
             chat_id=user,

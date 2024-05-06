@@ -30,7 +30,7 @@ async def mailing_message(message: types.Message, state: FSMContext) -> None:
         for item in user_list:
             _id = item.get("_id")
             await bot.send_message(chat_id=str(_id), text=message.text)
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.2)
         await message.answer("Рассылка завершена. Выход из состояния рассылки.")
 
         markup = await settings_buttons(user=user)
@@ -39,3 +39,9 @@ async def mailing_message(message: types.Message, state: FSMContext) -> None:
 
     except Exception as e:
         logging.error(f"{e}")
+
+
+# @router.message()
+# async def grab(message: types.Message):
+#     text = str(message.message_id.)
+#     await bot.send_message(chat_id=message.chat.id, text=text)
