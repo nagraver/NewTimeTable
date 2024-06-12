@@ -23,23 +23,20 @@ async def mailing(callback: types.CallbackQuery, state: FSMContext) -> None:
 
 @router.message(Schedule.mailing)
 async def mailing_message(message: types.Message, state: FSMContext) -> None:
-    try:
-        user = str(message.chat.id)
-
-        user_list = col.find()
-        for item in user_list:
+    user = str(message.chat.id)
+    user_list = col.find()
+    for item in user_list:
+        try:
             _id = item.get("_id")
             await bot.send_message(chat_id=str(_id), text=message.text)
             await asyncio.sleep(0.2)
-        await message.answer("Рассылка завершена. Выход из состояния рассылки.")
+        except Exception as e:
+            logging.error(f"{e}")
 
-        markup = await settings_buttons(user=user)
-        await process_the_settings(user=user, markup=markup, include_all=True)
-        await state.clear()
-
-    except Exception as e:
-        logging.error(f"{e}")
-
+    await message.answer("Рассылка завершена. Выход из состояния рассылки.")
+    markup = await settings_buttons(user=user)
+    await process_the_settings(user=user, markup=markup, include_all=True)
+    await state.clear()
 
 # @router.message()
 # async def grab(message: types.Message):

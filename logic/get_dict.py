@@ -4,13 +4,14 @@ from urllib.parse import quote_plus
 import asyncio
 
 
-# 'https://sevsu.samrzhevsky.ru/api/groups?v=3.1&section=0&institute='
+# https://sevsu.samrzhevsky.ru/api/groups?v=3.1&section=0&institute='
+# https://sevsu.samrzhevsky.ru/api/subgroups?v=3.2&section=0&institute=0&group=%D0%98%D0%91%2F%D0%B1-20-1-%D0%BE
 # 'https://sevsu.samrzhevsky.ru/api/schedule?v=3.1&section=0&institute=' + inst + '&group=' + str(
 # quote_plus(group)) + '&week=' + str(week_number)
 async def get_groups(inst):
     url = 'https://sevsu.samrzhevsky.ru/api/groups'
     params = {
-        'v': '3.1',
+        'v': '3.2',
         'section': '0',
         'institute': inst,
     }
@@ -25,7 +26,7 @@ async def get_schedule(inst, group, the_day):
     start_date = datetime.strptime('280823', "%d%m%y").date()
     week_number = (the_day - start_date).days // 7 + 1
     params = {
-        'v': '3.1',
+        'v': '3.2',
         'section': '0',
         'institute': inst,
         'group': str(quote_plus(group)),
