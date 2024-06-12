@@ -1,13 +1,14 @@
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 from aiogram import Bot
+from aiogram.client.bot import DefaultBotProperties
 import os
 from dotenv import load_dotenv
 from datetime import date
 
 load_dotenv()
 
-bot = Bot(os.getenv("BOT"), parse_mode="MARKDOWN")
+bot = Bot(os.getenv("BOT"), default=DefaultBotProperties(parse_mode="MARKDOWN"))
 uri = os.getenv("URI")
 
 
