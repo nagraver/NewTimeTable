@@ -3,11 +3,14 @@ from datetime import datetime
 from urllib.parse import quote_plus
 import asyncio
 
-
 # https://sevsu.samrzhevsky.ru/api/groups?v=3.1&section=0&institute='
 # https://sevsu.samrzhevsky.ru/api/subgroups?v=3.2&section=0&institute=0&group=%D0%98%D0%91%2F%D0%B1-20-1-%D0%BE
 # 'https://sevsu.samrzhevsky.ru/api/schedule?v=3.1&section=0&institute=' + inst + '&group=' + str(
 # quote_plus(group)) + '&week=' + str(week_number)
+
+header = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:127.0) Gecko/20100101 Firefox/127.0'}
+
+
 async def get_groups(inst):
     url = 'https://sevsu.samrzhevsky.ru/api/groups'
     params = {
@@ -16,7 +19,7 @@ async def get_groups(inst):
         'institute': inst,
     }
     async with httpx.AsyncClient() as client:
-        task = client.get(url, params=params)
+        task = client.get(url, params=params, headers=header)
         response = await asyncio.create_task(task)
 
     return response.json().get('groups')
@@ -35,7 +38,7 @@ async def get_schedule(inst, group, the_day):
     url = 'https://sevsu.samrzhevsky.ru/api/schedule'
 
     async with httpx.AsyncClient() as client:
-        task = client.get(url, params=params)
+        task = client.get(url, params=params, headers=header)
         response = await asyncio.create_task(task)
 
     return response.json().get('schedule')
