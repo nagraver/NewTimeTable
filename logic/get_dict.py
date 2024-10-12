@@ -3,13 +3,10 @@ from datetime import datetime
 from urllib.parse import quote_plus
 import asyncio
 
-# https://sevsu.samrzhevsky.ru/api/groups?v=3.1&section=0&institute='
-# https://sevsu.samrzhevsky.ru/api/subgroups?v=3.2&section=0&institute=0&group=%D0%98%D0%91%2F%D0%B1-20-1-%D0%BE
-# 'https://sevsu.samrzhevsky.ru/api/schedule?v=3.1&section=0&institute=' + inst + '&group=' + str(
-# quote_plus(group)) + '&week=' + str(week_number)
-
-header = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:127.0) Gecko/20100101 Firefox/127.0'}
-
+header = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0',
+    'referer': 'https://sevsu.samrzhevsky.ru/schedule'
+}
 
 async def get_groups(inst):
     url = 'https://sevsu.samrzhevsky.ru/api/groups'
@@ -26,8 +23,9 @@ async def get_groups(inst):
 
 
 async def get_schedule(inst, group, the_day):
-    start_date = datetime.strptime('280823', "%d%m%y").date()
+    start_date = datetime.strptime('020924', "%d%m%y").date()
     week_number = (the_day - start_date).days // 7 + 1
+    url = 'https://sevsu.samrzhevsky.ru/api/schedule'
     params = {
         'v': '3.2',
         'section': '0',
@@ -35,8 +33,7 @@ async def get_schedule(inst, group, the_day):
         'group': str(quote_plus(group)),
         'week': str(week_number),
     }
-    url = 'https://sevsu.samrzhevsky.ru/api/schedule'
-
+    print(params)
     async with httpx.AsyncClient() as client:
         task = client.get(url, params=params, headers=header)
         response = await asyncio.create_task(task)
