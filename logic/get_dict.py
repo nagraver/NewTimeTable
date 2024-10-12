@@ -33,7 +33,6 @@ async def get_schedule(inst, group, the_day):
         'group': str(quote_plus(group)),
         'week': str(week_number),
     }
-    print(params)
     async with httpx.AsyncClient() as client:
         task = client.get(url, params=params, headers=header)
         response = await asyncio.create_task(task)
