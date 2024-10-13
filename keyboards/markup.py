@@ -8,7 +8,7 @@ settings = InlineKeyboardButton(text='Настройки', callback_data='settin
 
 async def main_buttons(mode):
     buttons = []
-    key = [4, 8, 16][mode]
+    key = mode
     i = 1
     while i < key:
         day_l = date.today() + timedelta(days=i - 1)
@@ -99,9 +99,9 @@ async def menu_buttons():
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [
-                InlineKeyboardButton(text='4', callback_data='mode0'),
-                InlineKeyboardButton(text='8', callback_data='mode1'),
-                InlineKeyboardButton(text='16', callback_data='mode2')
+                InlineKeyboardButton(text='4', callback_data='mode4'),
+                InlineKeyboardButton(text='8', callback_data='mode8'),
+                InlineKeyboardButton(text='16', callback_data='mode16')
             ],
             [
                 settings

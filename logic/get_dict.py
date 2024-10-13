@@ -30,7 +30,7 @@ async def get_schedule(inst, group, the_day):
         'v': '3.2',
         'section': '0',
         'institute': inst,
-        'group': str(quote_plus(group)),
+        'group': str(group),
         'week': str(week_number),
     }
     async with httpx.AsyncClient() as client:

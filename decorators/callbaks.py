@@ -128,4 +128,4 @@ async def time_handler(message: types.Message):
         await process_the_settings(user=user, markup=markup, include_send=True)
 
     except ValueError:
-        await message.reply("Не соответствие формату ЧЧ:ММ", reply_markup=markup)
+        await message.reply("Не соответствие формату чч:мм", reply_markup=markup)
