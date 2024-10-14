@@ -1,13 +1,13 @@
 from datetime import datetime
 from aiogram.exceptions import TelegramBadRequest
+
 from logic.get_dict import get_schedule
 from keyboards.markup import inst_buttons, group_buttons, main_buttons
-from storage.connection import bot, Mongo
+from storage.connection import bot, Mongo, red, cache_message
 from storage.lists import week_day, time_list, institutes_arr
 
 
 db = Mongo()
-schedule_container = []
 
 async def process_the_message(user, the_day, msg=False):
     user_info = await db.get_user_info(user)
@@ -24,15 +24,15 @@ async def process_the_message(user, the_day, msg=False):
         markup = group_buttons(inst)
         await process_the_settings(user, markup, include_group=True)
         return
-    
-    found = False
-    for item in schedule_container:
-        if item.get('group') == group and item.get('date') == the_day:
-            message = item.get('message')
-            found = True
-            break
 
-    if not found:
+    key = f"{group}:{the_day}"
+    retrieved_value = red.get(key)
+
+    if retrieved_value:
+        message = retrieved_value.decode('utf-8')
+    else:
+        print("no retrieved_value")
+
         array = await get_schedule(inst, group, the_day)
         if array is None:
             await bot.send_message(user, "Проверь соответствие института и группы")
@@ -62,7 +62,7 @@ async def process_the_message(user, the_day, msg=False):
         if flag:
             message += f"\n\nЗанятий нет, либо расписание еще не появилось"
 
-        schedule_container.append({'group': group, 'date': the_day, 'message': message})
+        cache_message(key=key, value=message)
 
     if msg:
         try:

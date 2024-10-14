@@ -1,34 +1,27 @@
-import requests
-import asyncio
-import aiogram
-from bs4 import BeautifulSoup
+import redis
 
-session = requests.Session()
+r = redis.Redis(host='localhost', port=6379, db=0)
 
-header = {
-    'Accept': 'text/html',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0',
-}
+def cache_message(key, message, expiration=None):
+    r.set(key, message, ex=expiration)
 
-data = {
-    "username": "ttolla25@gmail.com",
-    "password": "8HUhZDod",
-    "rememberMe": "on",
-    "credentialId": ""
-}
+name = "name"
+date = "15"
+value = "Ваше значение"
 
+composite_key = f"{name}:{date}"
+cache_message(composite_key, value, expiration=5)
 
-async def getting():
-    # url = 'https://lk.sevsu.ru/student/index'
-    url = 'https://auth.sevsu.ru/realms/portal/login-actions/authenticate?execution=c0d674fe-7cd0-4b2e-951d-f486c14139aa&client_id=do&tab_id=mkfJLk1nyWY'
-    # response = requests.post(url, data=data, headers=header).text
-    response = requests.post(url, headers=header, data=data).text
-    print(response)
+while True:
+    _name = input("name")
+    _date = input("date")
 
+    key = f"{_name}:{_date}"
+    retrieved_value = r.get(key)
 
-async def main():
-    await getting()
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
+    if retrieved_value:
+        print(retrieved_value.decode('utf-8'))
+    else:
+        print('Значение не найдено')
+        _value = input("value")
+        cache_message(key, _value, expiration=10)

@@ -3,7 +3,7 @@ from datetime import datetime, date, timedelta
 import asyncio
 
 from storage.connection import Mongo
-from logic.process import process_the_message, schedule_container
+from logic.process import process_the_message
 
 db = Mongo()
 col = db.col
@@ -28,9 +28,3 @@ async def dispatch():
                     logging.error(f"Error:{e}")
 
         await asyncio.sleep(60)
-
-
-async def schedule_container_cleaner():
-    while True:
-        schedule_container.clear()
-        await asyncio.sleep(172800)  # 2-day sleep
