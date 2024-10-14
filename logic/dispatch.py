@@ -12,7 +12,7 @@ col = db.col
 async def dispatch():
     while True:
         user_list = col.find({'send': {'$exists': True}})
-        now = datetime.now()
+        now = datetime.now() + timedelta(hours=3)
         for doc in user_list:
             time_obj = datetime.strptime(doc.get("send"), "%H:%M")
             if time_obj.hour == now.hour and time_obj.minute == now.minute:
