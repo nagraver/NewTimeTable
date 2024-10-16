@@ -12,7 +12,7 @@ load_dotenv()
 bot = Bot(os.getenv("BOT"), default=DefaultBotProperties(parse_mode="MARKDOWN"))
 uri = os.getenv("URI")
 
-red = redis.Redis(host='localhost', port=6379, db=0)
+red = redis.Redis(host='redis', port=6379, db=0)
 def cache_message(key, value, expiration=60*60*24):
     red.set(key, value, ex=expiration)
 

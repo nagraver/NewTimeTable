@@ -1,0 +1,20 @@
+version: '3'
+services:
+  app:
+    build: .
+    container_name: bot
+    depends_on:
+      - redis
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_HOST=redis
+    volumes:
+      - .:/opt/app
+    command: ["python", "main.py"]
+
+  redis:
+    image: "redis:alpine"
+    container_name: redis
+    ports:
+      - "6379:6379"
