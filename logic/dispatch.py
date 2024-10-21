@@ -17,9 +17,7 @@ async def dispatch():
             time_obj = datetime.strptime(doc.get("send"), "%H:%M")
             if time_obj.hour == now.hour and time_obj.minute == now.minute:
                 day = doc.get("send_day")
-                if day == 0 and now.weekday() == 6:
-                    continue
-                elif day == 1 and now.weekday() == 5:
+                if day == 0 and now.weekday() == 6 or day == 1 and now.weekday() == 5:
                     continue
                 try:
                     the_day = date.today() + timedelta(days=day)
