@@ -19,6 +19,8 @@ async def dispatch():
                 day = doc.get("send_day")
                 if day == 0 and now.weekday() == 6:
                     continue
+                elif day == 1 and now.weekday() == 5:
+                    continue
                 try:
                     the_day = date.today() + timedelta(days=day)
                     await process_the_message(user=doc.get('_id'), the_day=the_day)

@@ -36,7 +36,6 @@ class Mongo:
         elif group:
             self.col.update_one({'_id': user}, {'$set': {'group': group}})
         elif mode:
-            print(mode)
             self.col.update_one({'_id': user}, {'$set': {'mode': mode}})
         elif send is not None:
             if send == '':
