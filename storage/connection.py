@@ -26,7 +26,7 @@ class Mongo:
     async def get_user_info(self, user):
         user_info = self.col.find_one({"_id": user})
         if user_info is None:
-            self.col.insert_one({"_id": user, "mode": 0, "send_day": 0})
+            self.col.insert_one({"_id": user, "mode": 4, "send_day": 0})
             user_info = self.col.find_one({"_id": user})
         return user_info
 
