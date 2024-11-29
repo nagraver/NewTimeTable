@@ -10,16 +10,17 @@ from logic.dispatch import dispatch
 
 load_dotenv()
 
-try:
-    async def main():
-        dp = Dispatcher()
-        dp.include_routers(commands.router, callbaks.router, admin.router)
-        await asyncio.gather(dp.start_polling(bot), dispatch())
+
+async def main():
+    dp = Dispatcher()
+    dp.include_routers(commands.router, callbaks.router, admin.router)
+    # await asyncio.gather(dp.start_polling(bot), dispatch())
+    await asyncio.gather(dp.start_polling(bot), dispatch(), return_exceptions=True)
 
 
-    if __name__ == "__main__":
-        logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+    try:
         asyncio.run(main())
-
-except Exception as e:
-    print(e)
+    except Exception as e:
+        logging.critical(f"Critical main error: {e}")
