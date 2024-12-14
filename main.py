@@ -14,7 +14,6 @@ load_dotenv()
 async def main():
     dp = Dispatcher()
     dp.include_routers(commands.router, callbaks.router, admin.router)
-    # await asyncio.gather(dp.start_polling(bot), dispatch())
     await asyncio.gather(dp.start_polling(bot), dispatch(), return_exceptions=True)
 
 

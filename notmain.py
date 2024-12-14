@@ -1,9 +1,11 @@
 import redis
 
-r = redis.Redis(host='localhost', port=6379, db=0)
+r = redis.Redis(host="localhost", port=6379, db=0)
+
 
 def cache_message(key, message, expiration=None):
     r.set(key, message, ex=expiration)
+
 
 name = "name"
 date = "15"
@@ -20,8 +22,8 @@ while True:
     retrieved_value = r.get(key)
 
     if retrieved_value:
-        print(retrieved_value.decode('utf-8'))
+        print(retrieved_value.decode("utf-8"))
     else:
-        print('Значение не найдено')
+        print("Значение не найдено")
         _value = input("value")
         cache_message(key, _value, expiration=10)
