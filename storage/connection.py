@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 from aiogram import Bot
-from aiogram.client.bot import DefaultBotProperties
+from aiogram.client.default import DefaultBotProperties
 import os
 import redis
 from dotenv import load_dotenv
@@ -9,11 +9,12 @@ from datetime import date
 
 load_dotenv()
 
-bot = Bot(os.getenv("BOT"), default=DefaultBotProperties(parse_mode="MARKDOWN"))
+bot = Bot((os.getenv("TESTBOT")), default=DefaultBotProperties(parse_mode="MARKDOWN"))
 uri = os.getenv("URI")
+red = redis.Redis(host="redis", port=6379, db=0)
 
-red = redis.Redis(host='redis', port=6379, db=0)
-def cache_message(key, value, expiration=60*60*24):
+
+def cache_message(key, value, expiration=60 * 60 * 24):
     red.set(key, value, ex=expiration)
 
 
@@ -30,19 +31,30 @@ class Mongo:
             user_info = self.col.find_one({"_id": user})
         return user_info
 
-    async def update_data(self, user, inst=None, group=None, mode=None, send=None, send_day=None, usage=None):
+    async def update_data(
+        self,
+        user,
+        inst=None,
+        group=None,
+        mode=None,
+        send=None,
+        send_day=None,
+        usage=None,
+    ):
         if inst:
-            self.col.update_one({'_id': user}, {'$set': {'inst': inst}})
+            self.col.update_one({"_id": user}, {"$set": {"inst": inst}})
         elif group:
-            self.col.update_one({'_id': user}, {'$set': {'group': group}})
+            self.col.update_one({"_id": user}, {"$set": {"group": group}})
         elif mode:
-            self.col.update_one({'_id': user}, {'$set': {'mode': mode}})
+            self.col.update_one({"_id": user}, {"$set": {"mode": mode}})
         elif send is not None:
-            if send == '':
-                self.col.update_one({'_id': user}, {'$unset': {'send': ''}})
+            if send == "":
+                self.col.update_one({"_id": user}, {"$unset": {"send": ""}})
             else:
-                self.col.update_one({'_id': user}, {'$set': {'send': send}})
+                self.col.update_one({"_id": user}, {"$set": {"send": send}})
         elif send_day is not None:
-            self.col.update_one({'_id': user}, {'$set': {'send_day': send_day}})
+            self.col.update_one({"_id": user}, {"$set": {"send_day": send_day}})
         elif usage:
-            self.col.update_one({'_id': user}, {'$set': {'usage': date.today().strftime('%Y.%m.%d')}})
+            self.col.update_one(
+                {"_id": user}, {"$set": {"usage": date.today().strftime("%Y.%m.%d")}}
+            )
