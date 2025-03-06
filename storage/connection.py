@@ -9,7 +9,7 @@ from datetime import date
 
 load_dotenv()
 
-bot = Bot((os.getenv("TESTBOT")), default=DefaultBotProperties(parse_mode="MARKDOWN"))
+bot = Bot((os.getenv("BOT")), default=DefaultBotProperties(parse_mode="MARKDOWN"))
 uri = os.getenv("URI")
 red = redis.Redis(host="redis", port=6379, db=0)
 
