@@ -31,8 +31,6 @@ async def process_the_message(user, the_day, msg=False):
     if retrieved_value:
         message = retrieved_value.decode('utf-8')
     else:
-        print("no retrieved_value")
-
         array = await get_schedule(inst, group, the_day)
         if array is None:
             await bot.send_message(user, "Проверь соответствие института и группы")
@@ -43,10 +41,7 @@ async def process_the_message(user, the_day, msg=False):
         prev_lesson, prev_date, prev_n = None, None, None
 
         for item in array:
-            print(item['date'])
-            # formatted_date = datetime.strptime(item['date'], "%d.%m.%Y").date()
             formatted_date = datetime.strptime(item['date'], "%Y-%m-%d").date()
-            print("formatted",formatted_date)
             if the_day == formatted_date:
                 flag = False
                 if item['n'] != prev_n or item['date'] != prev_date:

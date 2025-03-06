@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="83005f0a-8061-46f4-b28a-11fc8023abfd" name="Changes" comment="default buttons count 0 -&gt; 4">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/NewTimeTable.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NewTimeTable.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/poetry.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.swp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/decorators/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/decorators/commands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notmain.py" beforeDir="false" afterPath="$PROJECT_DIR$/notmain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/storage/connection.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="Dockerfile" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Pull.Settings">
+    <option name="OPTIONS">
+      <set>
+        <option value="REBASE" />
+      </set>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;nagraver&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/nagraver/NewTimeTable.git&quot;,
+    &quot;accountId&quot;: &quot;db296949-c014-4422-9f3f-f4457eac0104&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2nOcz7e4nS7Rs6tU9DmEWKid55h" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.delete.executor": "Run",
+    "Python.lists.executor": "Debug",
+    "Python.main.executor": "Run",
+    "Python.markup.executor": "Run",
+    "Python.notmain.executor": "Run",
+    "Python.йцу.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/Users/nagraver/Projects/NewTimeTable",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.breadcrumbs",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mongo"
+    ]
+  }
+}]]></component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="main.py" />
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="NewTimeTable" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-PY-243.21565.199" />
+        <option value="bundled-python-sdk-cab1f2013843-4ae2d6a61b08-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.21565.199" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="83005f0a-8061-46f4-b28a-11fc8023abfd" name="Changes" comment="" />
+      <created>1728847824450</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1728847824450</updated>
+      <workItem from="1728847825033" duration="106000" />
+      <workItem from="1728847934924" duration="107000" />
+      <workItem from="1728848253441" duration="55000" />
+      <workItem from="1728848312299" duration="531000" />
+      <workItem from="1728848854103" duration="82000" />
+      <workItem from="1728848968443" duration="11000" />
+      <workItem from="1728849001369" duration="5887000" />
+      <workItem from="1728855215518" duration="167000" />
+      <workItem from="1728855393657" duration="845000" />
+      <workItem from="1728911135638" duration="7278000" />
+      <workItem from="1728940259222" duration="1413000" />
+      <workItem from="1728943049652" duration="230000" />
+      <workItem from="1728943292730" duration="1297000" />
+      <workItem from="1728993911647" duration="5305000" />
+      <workItem from="1729000928354" duration="1465000" />
+      <workItem from="1729005504202" duration="647000" />
+      <workItem from="1729096551370" duration="822000" />
+      <workItem from="1729152212428" duration="1525000" />
+      <workItem from="1729496298897" duration="407000" />
+      <workItem from="1729497206863" duration="96000" />
+      <workItem from="1729509685518" duration="389000" />
+      <workItem from="1729517234091" duration="46000" />
+      <workItem from="1729517285177" duration="6000" />
+      <workItem from="1730323084087" duration="841000" />
+      <workItem from="1730931938180" duration="250000" />
+      <workItem from="1731331787044" duration="101000" />
+      <workItem from="1731331923149" duration="6000" />
+      <workItem from="1731484065101" duration="1000" />
+      <workItem from="1731573119221" duration="11000" />
+      <workItem from="1731573135858" duration="230000" />
+      <workItem from="1731573385280" duration="678000" />
+      <workItem from="1731578700389" duration="134000" />
+      <workItem from="1731832303833" duration="310000" />
+      <workItem from="1731833195801" duration="14000" />
+      <workItem from="1731833216193" duration="155000" />
+      <workItem from="1731856502566" duration="20000" />
+      <workItem from="1731856570645" duration="47000" />
+      <workItem from="1732522094479" duration="640000" />
+      <workItem from="1732692353075" duration="1839000" />
+      <workItem from="1732905914164" duration="5464000" />
+      <workItem from="1733158610308" duration="147000" />
+      <workItem from="1733158764177" duration="607000" />
+      <workItem from="1733469089094" duration="598000" />
+      <workItem from="1733484648892" duration="21000" />
+      <workItem from="1734108489994" duration="5000" />
+      <workItem from="1734113133167" duration="2000" />
+      <workItem from="1734192839216" duration="1037000" />
+      <workItem from="1734210383679" duration="35000" />
+      <workItem from="1734212712514" duration="586000" />
+      <workItem from="1734267829051" duration="664000" />
+      <workItem from="1734335359183" duration="41000" />
+      <workItem from="1734505397488" duration="18000" />
+      <workItem from="1735059604001" duration="128000" />
+      <workItem from="1735169840208" duration="285000" />
+      <workItem from="1735513239158" duration="108000" />
+      <workItem from="1737342258383" duration="104000" />
+      <workItem from="1739381225807" duration="1362000" />
+      <workItem from="1739538257731" duration="305000" />
+      <workItem from="1739638992695" duration="14000" />
+      <workItem from="1740130936389" duration="20000" />
+      <workItem from="1740769396398" duration="7653000" />
+      <workItem from="1740999264161" duration="562000" />
+    </task>
+    <task id="LOCAL-00001" summary="redis">
+      <option name="closed" value="true" />
+      <created>1728918550044</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1728918550044</updated>
+    </task>
+    <task id="LOCAL-00002" summary="docker-compose">
+      <option name="closed" value="true" />
+      <created>1729096758385</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1729096758385</updated>
+    </task>
+    <task id="LOCAL-00003" summary="saturday dispatch fix&#10;docker python-slim">
+      <option name="closed" value="true" />
+      <created>1729496693965</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1729496693965</updated>
+    </task>
+    <task id="LOCAL-00004" summary="a bit of changes">
+      <option name="closed" value="true" />
+      <created>1729497264966</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1729497264966</updated>
+    </task>
+    <task id="LOCAL-00005" summary="3.13">
+      <option name="closed" value="true" />
+      <created>1732693181401</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732693181401</updated>
+    </task>
+    <task id="LOCAL-00006" summary="next attempt to fix in main.py">
+      <option name="closed" value="true" />
+      <created>1732906569176</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732906569176</updated>
+    </task>
+    <task id="LOCAL-00007" summary="default buttons count 0 -&gt; 4">
+      <option name="closed" value="true" />
+      <created>1732913777784</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1732913777784</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="redis" />
+    <MESSAGE value="docker-compose" />
+    <MESSAGE value="saturday dispatch fix&#10;docker python-slim" />
+    <MESSAGE value="a bit of changes" />
+    <MESSAGE value="3.13" />
+    <MESSAGE value="next attempt to fix in main.py" />
+    <MESSAGE value="default buttons count 0 -&gt; 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="default buttons count 0 -&gt; 4" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/NewTimeTable$main.coverage" NAME="main Coverage Results" MODIFIED="1740778903394" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/NewTimeTable$markup.coverage" NAME="markup Coverage Results" MODIFIED="1728852925805" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/keyboards" />
+    <SUITE FILE_PATH="coverage/NewTimeTable$notmain.coverage" NAME="notmain Coverage Results" MODIFIED="1728996096631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NewTimeTable$lists.coverage" NAME="lists Coverage Results" MODIFIED="1728851997976" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/storage" />
+    <SUITE FILE_PATH="coverage/NewTimeTable$.coverage" NAME="йцу Coverage Results" MODIFIED="1728912765934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NewTimeTable$delete.coverage" NAME="delete Coverage Results" MODIFIED="1728913435043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
