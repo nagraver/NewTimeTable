@@ -10,7 +10,6 @@ from logic.dispatch import dispatch
 
 load_dotenv()
 
-
 async def main():
     dp = Dispatcher()
     dp.include_routers(commands.router, callbaks.router, admin.router)

@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   app:
     build: .
@@ -17,3 +19,4 @@ services:
     container_name: redis
     ports:
       - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]  # Без репликации
