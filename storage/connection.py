@@ -8,9 +8,12 @@ from dotenv import load_dotenv
 from datetime import date
 
 load_dotenv()
+BOT = os.getenv("BOT")
+TESTBOT = os.getenv("TESTBOT")
 
-bot = Bot((os.getenv("BOT")), default=DefaultBotProperties(parse_mode="MARKDOWN"))
+bot = Bot(TESTBOT, default=DefaultBotProperties(parse_mode="MARKDOWN"))
 uri = os.getenv("URI")
+
 red = redis.Redis(host="redis", port=6379, db=0)
 
 
@@ -20,7 +23,7 @@ def cache_message(key, value, expiration=60 * 60 * 24):
 
 class Mongo:
     def __init__(self):
-        self.client = MongoClient(uri, server_api=ServerApi('1'))
+        self.client = MongoClient(uri, server_api=ServerApi("1"))
         self.db = self.client.timetable
         self.col = self.db.data
 
@@ -55,6 +58,4 @@ class Mongo:
         elif send_day is not None:
             self.col.update_one({"_id": user}, {"$set": {"send_day": send_day}})
         elif usage:
-            self.col.update_one(
-                {"_id": user}, {"$set": {"usage": date.today().strftime("%Y.%m.%d")}}
-            )
+            self.col.update_one({"_id": user}, {"$set": {"usage": date.today().strftime("%Y.%m.%d")}})

@@ -2,18 +2,17 @@ FROM python:3.13-slim
 
 WORKDIR /opt/app
 
-ADD pyproject.toml ./
+# Установка uv (альтернатива pip)
+RUN pip install uv
 
-# Poetry
-ENV PATH="${PATH}:/root/.poetry/bin"
+# Копируем зависимости
+COPY pyproject.toml ./
 
-RUN : \
-&& pip install poetry \
-&& POETRY_VIRTUALENVS_CREATE=false poetry install --no-interaction --no-ansi \
-&& :
+# Установка зависимостей с помощью uv
+RUN uv pip install -e .
 
-# To COPY the remote files at working directory in container
+# Копируем остальные файлы
 COPY . .
 
-# Now the structure looks like this '/opt/app/cad_webapp/main.py'
+# Команда для запуска
 CMD ["python", "main.py"]
