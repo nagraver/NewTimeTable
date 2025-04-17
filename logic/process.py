@@ -10,7 +10,7 @@ from storage.lists import week_day, time_list, institutes_arr
 db = Mongo()
 
 async def process_the_message(user, the_day, msg=False):
-    user_info = await db.get_user_info(user)
+    user_info = await db.get_user_info(user) 
     inst = user_info.get('inst')
     group = user_info.get('group')
     mode = user_info.get('mode')

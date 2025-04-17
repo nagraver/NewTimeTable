@@ -8,13 +8,16 @@ from dotenv import load_dotenv
 from datetime import date
 
 load_dotenv()
+
 BOT = os.getenv("BOT")
 TESTBOT = os.getenv("TESTBOT")
+URI = os.getenv("URI")
+REDIS_PASSWORD = os.getenv("REDIS_PASSWORD")
 
-bot = Bot(TESTBOT, default=DefaultBotProperties(parse_mode="MARKDOWN"))
-uri = os.getenv("URI")
+bot = Bot(BOT, default=DefaultBotProperties(parse_mode="MARKDOWN"))
 
-red = redis.Redis(host="redis", port=6379, db=0)
+
+red = redis.Redis(host="redis", port=6379, db=0, password=REDIS_PASSWORD)
 
 
 def cache_message(key, value, expiration=60 * 60 * 24):
@@ -23,7 +26,7 @@ def cache_message(key, value, expiration=60 * 60 * 24):
 
 class Mongo:
     def __init__(self):
-        self.client = MongoClient(uri, server_api=ServerApi("1"))
+        self.client = MongoClient(URI, server_api=ServerApi("1"))
         self.db = self.client.timetable
         self.col = self.db.data
 

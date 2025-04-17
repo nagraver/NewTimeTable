@@ -14,11 +14,8 @@
   <component name="ChangeListManager">
     <list default="true" id="83005f0a-8061-46f4-b28a-11fc8023abfd" name="Changes" comment="default buttons count 0 -&gt; 4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/storage/connection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/process.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/process.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notmain.py" beforeDir="false" afterPath="$PROJECT_DIR$/notmain.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +89,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Python",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -213,6 +210,8 @@
       <workItem from="1743072545138" duration="814000" />
       <workItem from="1743435591340" duration="1090000" />
       <workItem from="1744240014633" duration="1153000" />
+      <workItem from="1744822908252" duration="1729000" />
+      <workItem from="1744891903825" duration="200000" />
     </task>
     <task id="LOCAL-00001" summary="redis">
       <option name="closed" value="true" />
