@@ -8,7 +8,7 @@ header = {
 }
 
 async def get_groups(inst):
-    url = 'https://sevsu.samrzhevsky.ru/api/groups'
+    url = 'https://schedule.sevsu.ru/api/groups'
     params = {
         'v': '4',
         'section': '0',
@@ -24,7 +24,7 @@ async def get_groups(inst):
 async def get_schedule(inst, group, the_day):
     start_date = datetime.strptime('020924', "%d%m%y").date()
     week_number = (the_day - start_date).days // 7 + 1
-    url = 'https://sevsu.samrzhevsky.ru/api/schedule'
+    url = 'https://schedule.sevsu.ru/api/schedule'
     params = {
         'v': '4',
         'section': '0',
